@@ -7,18 +7,17 @@ import one.slope.slip.io.DataTransformation;
 /**
  * Handles compressed text
  */
-public class CompressedTextPacketField extends PacketField<String> {
+public class CompressedTextFieldCodec extends FieldCodec<String> {
 	protected final DataTransformation transformation;
 	protected final DataEndian order;
 	
-	public CompressedTextPacketField(String name, int index, DataEndian order, DataTransformation transformation) {
-		super(name, index);
+	public CompressedTextFieldCodec(DataEndian order, DataTransformation transformation) {
 		this.order = order;
 		this.transformation = transformation;
 	}
 	
-	public CompressedTextPacketField(String name, int index) {
-		this(name, index, DataEndian.BIG, DataTransformation.NONE);
+	public CompressedTextFieldCodec() {
+		this(DataEndian.BIG, DataTransformation.NONE);
 	}
 
 	@Override

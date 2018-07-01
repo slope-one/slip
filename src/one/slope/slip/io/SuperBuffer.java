@@ -1,5 +1,7 @@
 package one.slope.slip.io;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 /**
@@ -7,6 +9,7 @@ import java.nio.ByteBuffer;
  */
 public final class SuperBuffer {
 	private ByteBuffer buffer;
+	private byte[] readStreamBuffer = null;
 	
 	public SuperBuffer(ByteBuffer buffer) {
 		this.buffer = buffer;
@@ -45,6 +48,35 @@ public final class SuperBuffer {
 	public SuperBuffer put(byte[] data) {
 		buffer.put(data);
 		return this;
+	}
+	
+	public SuperBuffer put(byte[] data, int offset, int length) {
+		buffer.put(data, offset, length);
+		return this;
+	}
+	
+	public SuperBuffer put(SuperBuffer buffer) {
+		return this.put(buffer, this.limit());
+	}
+	
+	public SuperBuffer put(SuperBuffer buffer, int amount) {
+		return this.put(buffer.get(amount));
+	}
+	
+	public int putAvailable(InputStream stream) throws IOException {
+		int available = stream.available();
+		
+		if (available > 0) {
+			if (readStreamBuffer == null || readStreamBuffer.length < available) {
+				readStreamBuffer = new byte[available];
+			}
+			
+			int read = stream.readNBytes(readStreamBuffer, 0, available);
+			put(readStreamBuffer, 0, read);
+			return read;
+		}
+		
+		return 0;
 	}
 	
 	public boolean hasRemaining() {

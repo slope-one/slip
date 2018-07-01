@@ -3,11 +3,10 @@ package one.slope.slip.io.packet.field;
 import one.slope.slip.io.SuperBuffer;
 import one.slope.slip.io.DataTerminator;
 
-public class StringPacketField extends PacketField<String> {
+public class StringPacketField extends FieldCodec<String> {
 	private DataTerminator terminator;
 	
-	public StringPacketField(String name, int index, DataTerminator terminator) {
-		super(name, index);
+	public StringPacketField(DataTerminator terminator) {
 		this.terminator = terminator;
 	}
 

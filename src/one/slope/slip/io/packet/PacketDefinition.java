@@ -6,22 +6,24 @@ import java.util.Comparator;
 import one.slope.slip.io.packet.field.PacketField;
 
 public class PacketDefinition {
-	protected final int id;
-	protected final String name;
 	protected final PacketField<?>[] fields;
 	protected final PacketSize size;
+	protected final PacketType type;
+	protected final String name;
 	protected final int length;
+	protected final int id;
 	
-	public PacketDefinition(int id, String name, PacketField<?>[] fields, PacketSize size) {
-		this(id, name, fields, size, size == PacketSize.LENGTH_BYTE ? -1 : -2);
+	public PacketDefinition(int id, String name, PacketField<?>[] fields, int length) {
+		this(PacketType.SERVICE, id, name, fields, length);
 	}
 	
-	public PacketDefinition(int id, String name, PacketField<?>[] fields, PacketSize size, int length) {
+	public PacketDefinition(PacketType type, int id, String name, PacketField<?>[] fields, int length) {
 		this.id = id;
+		this.type = type;
 		this.name = name;
 		this.fields = fields;
 		this.length = length;
-		this.size = size;
+		this.size = length >= 0 ? PacketSize.FIXED : PacketSize.VARIABLE;
 		
 		Arrays.sort(this.fields, new Comparator<PacketField<?>>() {
 			public int compare(PacketField<?> a, PacketField<?> b) {
@@ -66,6 +68,10 @@ public class PacketDefinition {
 	
 	public PacketField<?>[] fields() {
 		return fields;
+	}
+	
+	public PacketType type() {
+		return type;
 	}
 	
 	public int id() {

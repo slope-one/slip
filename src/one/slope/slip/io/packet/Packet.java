@@ -64,6 +64,10 @@ public class Packet {
 		return (T)values.get(name);
 	}
 	
+	public Map<String, Object> values() {
+		return values;
+	}
+	
 	public PacketDefinition definition() {
 		return definition;
 	}

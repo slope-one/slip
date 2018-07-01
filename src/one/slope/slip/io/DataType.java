@@ -53,4 +53,14 @@ public enum DataType {
 	public int width() {
 		return width;
 	}
+	
+	public static DataType getTypeForWidth(int width) {
+		for (DataType type : values()) {
+			if (type.width == width) {
+				return type;
+			}
+		}
+		
+		return null;
+	}
 }

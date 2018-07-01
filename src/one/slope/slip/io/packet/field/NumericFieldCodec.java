@@ -6,24 +6,23 @@ import one.slope.slip.io.SuperBuffer;
 import one.slope.slip.io.DataTransformation;
 
 // TODO implement "smart" as subclass
-public class NumericPacketField<T> extends PacketField<T> {
+public class NumericFieldCodec<T> extends FieldCodec<T> {
 	protected final DataTransformation transformation;
 	protected final DataEndian order;
 	protected final DataType size;
 	
-	public NumericPacketField(String name, int index, DataType size, DataEndian order, DataTransformation transformation) {
-		super(name, index);
+	public NumericFieldCodec(DataType size, DataEndian order, DataTransformation transformation) {
 		this.size = size;
 		this.order = order;
 		this.transformation = transformation;
 	}
 	
-	public NumericPacketField(String name, int index, DataType size, DataTransformation transformation) {
-		this(name, index, size, DataEndian.BIG, transformation);
+	public NumericFieldCodec(DataType size, DataTransformation transformation) {
+		this(size, DataEndian.BIG, transformation);
 	}
 	
-	public NumericPacketField(String name, int index, DataType size) {
-		this(name, index, size, DataEndian.BIG, DataTransformation.NONE);
+	public NumericFieldCodec(DataType size) {
+		this(size, DataEndian.BIG, DataTransformation.NONE);
 	}
 
 	@Override
