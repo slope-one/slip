@@ -121,6 +121,14 @@ public final class SuperBuffer {
 		return (int)getLongUnsigned(size);
 	}
 	
+	public long get(DataType size, DataEndian order, DataTransformation transformation, DataRange range) {
+		if (range == DataRange.UNSIGNED) {
+			return getUnsigned(size, order, transformation);
+		}
+
+		return get(size, order, transformation);
+	}
+	
 	// TODO?: unsigned for long
 	public long getUnsigned(DataType size, DataEndian order, DataTransformation transformation) {
 		long value = get(size, order, transformation);
