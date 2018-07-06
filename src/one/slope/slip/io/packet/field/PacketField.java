@@ -5,7 +5,7 @@ import one.slope.slip.io.SuperBuffer;
 public class PacketField<T> extends FieldCodec<T> {
 	protected final int index;
 	protected final String name;
-	protected final FieldCodec<T> codec;
+	protected transient final FieldCodec<T> codec;
 	
 	public PacketField(String name, int index, FieldCodec<T> codec) {
 		this.index = index;

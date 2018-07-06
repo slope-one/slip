@@ -220,6 +220,14 @@ public final class SuperBuffer {
 		return this;
 	}
 	
+	public SuperBuffer put(long value, DataType size, DataEndian order) {
+		return this.put(value, size, order, DataTransformation.NONE);
+	}
+	
+	public SuperBuffer put(long value, DataType size) {
+		return this.put(value, size, DataEndian.BIG);
+	}
+	
 	public String getString() {
 		return getString(DataTerminator.LINE_FEED);
 	}

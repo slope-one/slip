@@ -7,11 +7,11 @@ import one.slope.slip.io.SuperBuffer;
 import one.slope.slip.io.packet.field.PacketField;
 
 public class Packet {
-	public static final int DEFAULT_ALLOCATION_SIZE = 4096;
+	public transient static final int DEFAULT_ALLOCATION_SIZE = 4096;
 	
 	private final Map<String, Object> values = new HashMap<String, Object>();
 	private final PacketDefinition definition;
-	private final SuperBuffer buffer; // TODO maybe move out of this class?
+	private transient final SuperBuffer buffer; // TODO maybe move out of this class?
 	
 	public Packet(PacketDefinition definition) {
 		this(definition, new SuperBuffer(definition.length() >= 0 ? definition.length() : DEFAULT_ALLOCATION_SIZE));

@@ -13,10 +13,6 @@ public class PacketDefinition {
 	protected final int length;
 	protected final int id;
 	
-	public PacketDefinition(int id, String name, PacketField<?>[] fields, int length) {
-		this(PacketType.SERVICE, id, name, fields, length);
-	}
-	
 	public PacketDefinition(PacketType type, int id, String name, PacketField<?>[] fields, int length) {
 		this.id = id;
 		this.type = type;
